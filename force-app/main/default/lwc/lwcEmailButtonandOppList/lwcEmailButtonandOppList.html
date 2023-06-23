@@ -1,0 +1,71 @@
+<template>
+
+    <lightning-card  title = "Opportunity List">
+        <lightning-button  variant="brand" label="Send Email" title="Primary action" onclick={handleClick} class="slds-align_absolute-center"></lightning-button>
+        
+        <template lwc:if={data1}>
+            <ul class="slds-m-around_medium">
+    
+    
+                <lightning-datatable 
+                            
+                            key-field="Id" 
+                            selected-rows={preSelectedRows}
+                            onrowselection={handleRowSelection}
+                            data={data1} 
+                            columns={columns}
+                            >
+                </lightning-datatable>
+    
+    
+                
+    
+    
+          
+    
+                <!-- <table>
+    
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Stage Name</th>
+                        <th>Amount</th>
+                        <th>Email</th>
+                    </tr>
+    
+    
+                </table>
+    
+                <template for:each={data1} for:item="da12">
+    
+                    <li key={da12.Id}>
+                        <table>
+                            <tr>
+                                <td>{da12.Id}</td>
+                                <td>{da12.Name}</td>
+                                <td>{da12.StageName}</td>
+                                <td>{da12.Amount}</td>
+                                <td><lightning-button-icon aria-setsize="30" icon-name="custom:custom23" variant="bare"
+                                        alternative-text="Settings" title="Settings"></lightning-button-icon></td>
+                            </tr>
+                        </table>
+    
+                    </li>
+                </template> -->
+    
+    
+    
+            </ul>
+        </template>
+    
+        <template lwc:elseif={data1}>
+            <p>Data not Found</p>
+        </template>
+
+    </lightning-card>
+
+    
+
+
+
+</template>
