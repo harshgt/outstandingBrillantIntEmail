@@ -6,5 +6,8 @@ public with sharing class getOpportunityForAccount {
 
     }
 
+
+    
+
     
 }

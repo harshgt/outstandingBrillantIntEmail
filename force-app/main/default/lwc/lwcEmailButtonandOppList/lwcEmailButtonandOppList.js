@@ -1,5 +1,7 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getOppo from '@salesforce/apex/getOpportunityForAccount.getOpportunityForAccount';
+import getCont from '@salesforce/apex/getContactForAccount.getContactForAccount';
+
 
 const COLUMNS = [
     { label: 'Opportunity Name', fieldName: 'Name' },
@@ -20,8 +22,11 @@ export default class LwcEmailButtonandOppList extends LightningElement {
     columns = COLUMNS;
     @api recordId;
     @track data1;
+    @track data2;
+
+
     selectedIteam;
-    selectedRows1=[];
+    selectedRows1 = [];
 
 
 
@@ -39,6 +44,18 @@ export default class LwcEmailButtonandOppList extends LightningElement {
         }
     }
 
+    //retrive crelated contact
+    @wire(getCont, { recordIds: '$recordId' })
+    getContAcc({ data, error }) {
+        if (data) {
+            this.data2 = data;
+
+        }
+        else if (error) {
+
+        }
+    } 
+
 
     get OppFound() {
         if (this.data1) {
@@ -52,16 +69,21 @@ export default class LwcEmailButtonandOppList extends LightningElement {
 
 
     handleClick(event) {
-        var selectedRows1 = event.detail.selectedRows;
-        console.log('show record this.selectedRows', this.selectedRows1);
+        var selectedRecords = this.template.querySelector("lightning-datatable").getSelectedRows();
+        console.log(selectedRecords);
+
+
+        console.log('data for the apex contact',data2);
+        //this.lwcEmailButtonandOppList = !this.LwcEmail; 
+
+
     }
 
-    handleRowSelection = event => {
-        var selectedRows = event.detail.selectedRows;
-        console.log('show record this.selectedRows', this.selectedRows);
-    }
 
 
+
+    
+   
 
 
 
