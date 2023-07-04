@@ -6,7 +6,7 @@ import getEmailOpposCont from '@salesforce/apex/getEmailCont.getEmailCont';
 
 const actions = [
     { label: 'View', name: 'view' },
-    { label: 'Edit', name: 'edit' },
+    
     
 ];
 
@@ -253,6 +253,7 @@ sendEmail(event){
     
     this.selectedContactEmail = [];
     this.isShowModal = false;
+    this.selectedOpportunity = null;
 }
 
 
@@ -295,7 +296,15 @@ sendEmail(event){
       .then(result => {
        console.log('result1: ',result.Id);
        console.log('result2: ',result);
-       this.rest = result;
+
+       if(result.length > 0)
+       {
+        this.rest = result;
+       }
+       else{
+        this.rest = 0;
+       }
+       
        // return refreshApex(this.recordId);
        //window.location.reload;
       })
