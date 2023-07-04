@@ -43,9 +43,19 @@ const COLUMNS1 = [
 
 
 const COLUMNS2 = [
-    { label: 'Contact Email Name', fieldName: 'Name' },
+    { label: 'ContactEmail Number', fieldName: 'Name' },
 
     { label: 'Contact Name', fieldName: 'Contact_Name__c' },
+
+    { label: 'Email', fieldName: 'Contact_Email__c' },
+
+    { label: 'Send Date', fieldName: 'CreatedDate', type: 'date',
+        typeAttributes:
+        {
+            day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',
+            second:'2-digit',hour12:true
+        }
+    },
 
     { label: 'Opportunity Name', fieldName: 'Opportunity_Name__c' },
 
@@ -78,7 +88,7 @@ columns2 = COLUMNS2;
 @api recordId;
 @track data1;
 @track data2;
-@track rest;
+@track rest = [];
 
 
 selectedRows;
@@ -267,9 +277,7 @@ sendEmail(event){
           this.viewseletedrecord(row);
           break;
 
-        case 'edit':
-          //this.uploadnewversionfile(row);
-          break
+        
 
         default:
       }
@@ -278,11 +286,12 @@ sendEmail(event){
     
     viewseletedrecord(currentRow){
         const seletedRow = currentRow;
-      //console.log('seletedRow:' , seletedRow);
-      console.log('seletedRow:' , seletedRow);
-      //console.log('seletedRow:' , seletedRow.value);
+        console.log('seletedRow1:' , currentRow);
+      console.log('seletedRow2:' , seletedRow);
+      //console.log('seletedRow3:' , this.seletedRow);
+      console.log('seletedRow4:' , seletedRow.Id);
 
-      getEmailOpposCont({'recIds': seletedRow.value})
+       getEmailOpposCont({ recIds :seletedRow.Id})
       .then(result => {
        console.log('result1: ',result.Id);
        console.log('result2: ',result);
@@ -296,7 +305,7 @@ sendEmail(event){
         
         console.log("error", JSON.stringify(this.error));
       });
-
+ 
 
     }
 
